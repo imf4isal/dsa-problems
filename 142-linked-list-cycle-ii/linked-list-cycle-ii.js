@@ -11,7 +11,7 @@
  * @return {ListNode}
  */
 var detectCycle = function(head) {
- if(head === null || head.next === null) return null;
+ if(!head || !head.next) return null;
 
     let first = head;
     let second = head;
