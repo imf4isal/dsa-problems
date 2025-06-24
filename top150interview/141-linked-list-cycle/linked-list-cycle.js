@@ -16,11 +16,11 @@ var hasCycle = function(head) {
     let tortoise = head;
     let hare = head.next;
 
-    while (hare && hare.next) {
+    while(hare && hare.next){
         if(tortoise === hare) return true;
-
         tortoise = tortoise.next;
         hare = hare.next.next;
     }
+
     return false;
 };
