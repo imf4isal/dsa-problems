@@ -1,39 +1,42 @@
 /**
  * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
+ * function ListNode(val, next = null) {
+ *     this.val = val;
+ *     this.next = next;
  * }
  */
+
 /**
  * @param {ListNode} l1
  * @param {ListNode} l2
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    const dummy = new ListNode();
-    let current = dummy;
+    let dummy = new ListNode(0);
+    let res = dummy;
+
+    let total = 0;
     let carry = 0;
 
-    while(l1 || l2 || carry){
-        let sum = 0;
+    while (l1 || l2 || carry) {
+        total = carry;
 
-        if(l1){
-            sum+= l1.val;
-            l1 = l1.next;   
+        if (l1) {
+            total += l1.val;
+            l1 = l1.next;
         }
-        if(l2){
-            sum+= l2.val;
+
+        if (l2) {
+            total += l2.val;
             l2 = l2.next;
         }
 
-        sum += carry;
+        let num = total % 10;
+        carry = Math.floor(total / 10);
 
-        carry = Math.floor(sum/10);
-        const node = new ListNode(sum%10);
-
-        current.next = node;
-        current = node;
+        dummy.next = new ListNode(num);
+        dummy = dummy.next;
     }
-    return dummy.next;
+
+    return res.next;
 };
