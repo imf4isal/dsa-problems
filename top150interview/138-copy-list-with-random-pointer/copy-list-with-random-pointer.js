@@ -13,36 +13,29 @@
  */
 var copyRandomList = function(head) {
     if(!head) return null;
-    const nodeMap = new Map();
+    
     let current = head;
-    let idx = 0;
-
-    const arr = [];
-
     while(current){
-        arr.push(new ListNode(current.val, null, null))
-        nodeMap.set(current, idx);
-        current = current.next;
-        idx++;
+        const copyNode = new _Node(current.val, current.next, null);
+        current.next = copyNode;
+        current = copyNode.next;
     }
-
-    arr.push(null);
 
     current = head;
-    for(let i=0; i< arr.length-1; i++){
-        const randomNode = current.random;
-        if(randomNode){
-            const randomNodeIdx = nodeMap.get(randomNode);
-            arr[i].random = arr[randomNodeIdx];
-        }else{
-            arr[i].random = null;
-        }
-        current = current.next;
+    while (current) {
+        const copy = current.next;
+        copy.random = current.random ? current.random.next : null;
+        current = copy.next;
     }
 
-    for(let i=0; i<arr.length-1; i++){
-        arr[i].next = arr[i+1];
+    current = head;
+    const newHead = current.next;
+    while(current){
+        const copy = current.next;
+        current.next = copy.next;
+        current = current.next;
+        copy.next = current ? current.next : null;
     }
-    
-    return arr[0];
+
+    return newHead;
 };
