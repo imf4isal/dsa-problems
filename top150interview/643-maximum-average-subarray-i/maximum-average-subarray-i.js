@@ -4,7 +4,7 @@
  * @return {number}
  */
 var findMaxAverage = function (nums, k) {
-    const res = [];
+    let max = Number.NEGATIVE_INFINITY;
 
     let windowSum = 0;
     let windowStart = 0;
@@ -13,18 +13,11 @@ var findMaxAverage = function (nums, k) {
         windowSum+=nums[windowEnd];
 
         if(windowEnd >= k - 1){
-            res.push(windowSum/k);
+            max = Math.max(max, windowSum/k);
             windowSum -= nums[windowStart];
             windowStart+=1;
         }
     }
-    console.log(res);
-
-
-    let max = res[0];
-    for (let i = 1; i < res.length; i++) {
-        if (res[i] > max) max = res[i];
-    }
-
+    
     return max;
 };
