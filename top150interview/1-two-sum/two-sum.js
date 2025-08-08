@@ -4,24 +4,14 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
+    const hash = new Map();
 
-    const sortedNums = [...nums].sort((a,b) => a - b);
-    
-    let left = 0;
-    let right = sortedNums.length - 1;
-
-    while(sortedNums[left]+sortedNums[right] !== target){
-        if(sortedNums[left]+sortedNums[right] < target){
-            left++;
-        }else{
-            right--;
+    for(let i = 0; i < nums.length; i++){
+        if(hash.has(target-nums[i])){
+            return [hash.get(target-nums[i]), i];
         }
+        hash.set(nums[i], i);
     }
-    console.log(sortedNums[left], sortedNums[right]);
-
-    const l = nums.indexOf(sortedNums[left]);
-    nums[nums.indexOf(sortedNums[left])] = '_';
-    const r = nums.indexOf(sortedNums[right]);
-
-    return [l, r]
+    return [];
+    
 };
