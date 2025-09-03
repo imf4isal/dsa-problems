@@ -13,18 +13,17 @@
  */
 var getIntersectionNode = function(headA, headB) {
 
-    const hashL = new Set();
+    let pa = headA;
+    let pb = headB;
 
-    let currA = headA;
-    while(currA){
-        hashL.add(currA);
-        currA = currA.next;
+    while(pa !== pb){
+        if(pa) pa = pa.next;
+        else pa = headB;
+
+        if(pb) pb = pb.next;
+        else pb = headA;
     }
 
-    let currB = headB;
-    while(currB){
-        if(hashL.has(currB)) return currB;
-        currB = currB.next;
-    }
-    return null;
+    
+    return pa;
 };
