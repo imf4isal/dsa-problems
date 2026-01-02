@@ -2,19 +2,23 @@
  * @param {string} s
  * @return {boolean}
  */
-var isAlNum = function(s) {
-    return /^[a-zA-Z0-9]+$/.test(s);
+
+function isAlphaNumeric(str) {
+  const regex = /^[a-zA-Z0-9]+$/;
+  return regex.test(str);
 }
 
 var isPalindrome = function(s) {
     let left = 0, right = s.length - 1;
+
     while(left<right){
-        while (left<right && !isAlNum(s[left])) left++;
-        while (left<right && !isAlNum(s[right])) right--;
+        while(left<right && !isAlphaNumeric(s[left])) left++;
+        while(left<right && !isAlphaNumeric(s[right])) right--;
         if(s[left].toLowerCase() !== s[right].toLowerCase()) return false;
-       
-        left++;
-        right--
+        if(s[left].toLowerCase() === s[right].toLowerCase()){
+            left++;
+            right--;
+        }
     }
     return true;
 };
