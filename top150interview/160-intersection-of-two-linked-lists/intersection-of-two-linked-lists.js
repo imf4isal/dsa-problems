@@ -12,21 +12,14 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function(headA, headB) {
-    const checked = new Set();
+    let pointA = headA, pointB = headB;
 
-    let currentA = headA, currentB = headB;
+    while(pointA !== pointB){
+        if(pointA) pointA = pointA.next;
+        else pointA = headB;
 
-    while(currentA){
-        checked.add(currentA);
-        currentA = currentA.next;
+        if(pointB) pointB = pointB.next;
+        else pointB = headA; 
     }
-
-    while(currentB){
-        if(checked.has(currentB)) return currentB;
-        else {
-            checked.add(currentB);
-            currentB = currentB.next;
-        }
-    }
-    return null;
+    return pointA;
 };
